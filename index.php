@@ -38,9 +38,27 @@ $products = [
 $totalValue = 0;
 
 function validate()
-{
+{ 
+    $invalidFields = [];
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = test_input($_POST["email"]);
+        $street = test_input($_POST["street"]);
+        $streetnumber = test_input($_POST["streetnumber"]);
+        $city = test_input($_POST["city"]);
+        $zipcode = test_input($_POST["zipcode"]);
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $invalidFields[] = "email";
+    }
+
+    if (!ctype_digit($streetnumber) || $streetnumber <= 0) {
+        $invalidFields[] = "streetnumber";
+    }
+
     // TODO: This function will send a list of invalid fields back
-    return [];
+    return $invalidFields;
 }
 
 function handleForm()
@@ -61,5 +79,4 @@ $formSubmitted = false;
 if ($formSubmitted) {
     handleForm();
 }
-
 require 'form-view.php';
