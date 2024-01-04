@@ -23,7 +23,16 @@ function whatIsHappening() {
 
 // TODO: provide some products (you may overwrite the example)
 $products = [
-    ['name' => 'Your favourite drink', 'price' => 2.5],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Gandalf the Gray', 'price' => 50],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Edna Mode', 'price' => 35],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Spiderman', 'price' => 55],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Wednesday Addams', 'price' => 65],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Levi Ackerman', 'price' => 65],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Ellen Ripley', 'price' => 50],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Satoru Gojo', 'price' => 45],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Sarah Connor ', 'price' => 50],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as Morpheus', 'price' => 35],
+    ['name' => 'Basile Variants' , 'description' => ' - Basile as The Joker ', 'price' => 45], 
 ];
 
 $totalValue = 0;
