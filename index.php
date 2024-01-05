@@ -39,22 +39,29 @@ $totalValue = 0;
 
 function validate()
 { 
-    $invalidFields = [];
-
+   
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = test_input($_POST["email"]);
-        $street = test_input($_POST["street"]);
-        $streetnumber = test_input($_POST["streetnumber"]);
-        $city = test_input($_POST["city"]);
-        $zipcode = test_input($_POST["zipcode"]);
-    }
+        if (empty($_POST["email"])) {
+            $invalidFields[] = "email";
+        } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            $invalidFields[] = "email_invalid";
+        }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $invalidFields[] = "email";
-    }
+        if (empty($_POST["street"])) {
+            $invalidFields[] = "street";
+        } 
 
-    if (!ctype_digit($streetnumber) || $streetnumber <= 0) {
-        $invalidFields[] = "streetnumber";
+        if (empty($_POST["streetnumber"]) || !ctype_digit($_POST["streetnumber"]) || $_POST["streetnumber"] <= 0) {
+            $invalidFields[] = "streetnumber";
+        }
+
+        if (empty($_POST["city"])) {
+            $invalidFields[] = "city";
+        }
+        
+        if (empty($_POST["zipcode"])) {
+            $invalidFields[] = "zipcode";
+        }
     }
 
     // TODO: This function will send a list of invalid fields back
@@ -69,8 +76,18 @@ function handleForm()
     $invalidFields = validate();
     if (!empty($invalidFields)) {
         // TODO: handle errors
+        $_SESSION['errors'] = $invalidFields;
+        header("Location: form-view.php");
+        exit;
     } else {
         // TODO: handle successful submission
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
+            $street = htmlspecialchars($_POST["street"]);
+            $streetnumber = htmlspecialchars($_POST["streetnumber"]);
+            $city = htmlspecialchars($_POST["city"]);
+            $zipcode = htmlspecialchars($_POST["zipcode"]);
+        } 
     }
 }
 
